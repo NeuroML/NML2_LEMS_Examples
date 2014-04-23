@@ -1,0 +1,5 @@
+export LEMS_VERSION=0.9.5.2
+
+export CLASSPATH=jlems-$LEMS_VERSION.jar
+
+java -Xmx400M -classpath $CLASSPATH org.lemsml.jlems.viz.VizMain $1 $2 $3 $4

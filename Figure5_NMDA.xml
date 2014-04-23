@@ -1,0 +1,157 @@
+<Lems>
+
+    <Target component="sim1"/>
+    
+    <!-- Include standard NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    <!-- custom ComponentTypes -->
+    <ComponentType name="rampCell">
+        <Parameter name="v0" dimension="voltage"/>
+        <Parameter name="v1" dimension="voltage"/>
+        <Parameter name="tau" dimension="time"/>
+        <Attachments name="synapses" type="basePointCurrent"/>
+        
+        <Exposure name="v" dimension="voltage" description="Membrane potential"/>
+        
+        <Children name="blockingPlasticSynapse" type="blockingPlasticSynapse"/>
+        
+        <Dynamics>
+            <DerivedVariable name="v" dimension="voltage" exposure="v" value="v0 + (t*(v1-v0)/tau)"/>
+
+        </Dynamics>
+    </ComponentType>
+
+    <!-- component definitions -->
+    <spikeGenerator id="spikeGen" period="15ms" />
+
+    <rampCell id="vClampCell" v0="100 mV" v1="100 mV" tau="1 ms"/>
+
+    <blockingPlasticSynapse id="nmdaSyn" gbase="2nS" erev="0mV" 
+                            tauRise="2ms" tauDecay="20ms">
+        <blockMechanism  type="voltageConcDepBlockMechanism" 
+                       species="mg" blockConcentration="1 mM" 
+                       scalingConc= "2 mM"  scalingVolt="15 mV"/>
+        <plasticityMechanism type="tsodyksMarkramDepFacMechanism" 
+                           initReleaseProb="0.25" tauFac="50 ms" tauRec="150 ms"/>
+    </blockingPlasticSynapse>
+
+
+    <rampCell id="cell0" v0="-100 mV" v1="100 mV" tau="200 ms">
+        <blockingPlasticSynapse id="nmdaSyn0" gbase="0.5nS" erev="0mV" 
+                              tauRise="2ms" tauDecay="8ms">
+            <blockMechanism  type="voltageConcDepBlockMechanism" 
+                     species="mg" blockConcentration="0.001 mM" 
+                     scalingConc= "2 mM"  scalingVolt="15 mV"/>
+        </blockingPlasticSynapse>
+        <blockingPlasticSynapse id="nmdaSyn1" gbase="0.5nS" erev="0mV" 
+                              tauRise="2ms" tauDecay="8ms">
+            <blockMechanism  type="voltageConcDepBlockMechanism" 
+                     species="mg" blockConcentration="0.01 mM" 
+                     scalingConc= "2 mM"
+                     scalingVolt="15 mV"/>
+        </blockingPlasticSynapse>
+        <blockingPlasticSynapse id="nmdaSyn2" gbase="0.5nS" erev="0mV" 
+                              tauRise="2ms" tauDecay="8ms">
+            <blockMechanism  type="voltageConcDepBlockMechanism" 
+                     species="mg" blockConcentration="0.1 mM" 
+                     scalingConc= "2 mM"  scalingVolt="15 mV"/>
+        </blockingPlasticSynapse>
+        <blockingPlasticSynapse id="nmdaSyn3" gbase="0.5nS" erev="0mV" 
+                              tauRise="2ms" tauDecay="8ms">
+            <blockMechanism  type="voltageConcDepBlockMechanism" 
+                     species="mg" blockConcentration="1 mM" 
+                     scalingConc= "2 mM"  scalingVolt="15 mV"/>
+        </blockingPlasticSynapse>
+        <blockingPlasticSynapse id="nmdaSyn4" gbase="0.5nS" erev="0mV" 
+                              tauRise="2ms" tauDecay="8ms">
+            <blockMechanism  type="voltageConcDepBlockMechanism" 
+                     species="mg" blockConcentration="10 mM" 
+                     scalingConc= "2 mM"  scalingVolt="15 mV"/>
+        </blockingPlasticSynapse>
+        <blockingPlasticSynapse id="nmdaSyn5" gbase="0.5nS" erev="0mV" 
+                              tauRise="2ms" tauDecay="8ms">
+            <blockMechanism  type="voltageConcDepBlockMechanism" 
+                     species="mg" blockConcentration="100 mM" 
+                     scalingConc= "2 mM"  scalingVolt="15 mV"/>
+        </blockingPlasticSynapse>
+    </rampCell>
+
+   
+    
+    <network id="net">
+        <population id="srcPop" component="spikeGen" size="1"/>
+        <population id="clampPop" component="vClampCell" size="1"/>
+        <!--<population id="rampPop" component="cell0" size="1"/>-->
+        <synapticConnection from="srcPop[0]" to="clampPop[0]"
+                            synapse="nmdaSyn" destination="synapses"/>
+    </network>
+
+    
+    <!-- Simulation configuration -->
+    <Simulation id="sim1" length="200ms" step="0.01ms" target="net">
+
+        <Display id="d1" title="Synaptic conductance for vClampCell" timeScale="1ms" xmin="-20" xmax="220" ymin="-0.05" ymax="1.05">
+            <Line id="g (nS)" quantity="clampPop[0]/nmdaSyn/g" scale="1nS"
+                  color="#086A87" timeScale="1ms"/>
+            <Line id="U" quantity="clampPop[0]/nmdaSyn/plasticityMechanism/U" scale="1"
+              color="#DBA901" timeScale="1ms"/>
+            <Line id="R" quantity="clampPop[0]/nmdaSyn/plasticityMechanism/R" scale="1"
+              color="#8A0886" timeScale="1ms"/>
+        </Display>
+        
+        
+        <OutputFile id="conductances" fileName="nmda.dat">
+            <OutputColumn id="g" quantity="clampPop[0]/nmdaSyn/g"/> 
+            <OutputColumn id="U" quantity="clampPop[0]/nmdaSyn/plasticityMechanism/U"/> 
+            <OutputColumn id="R" quantity="clampPop[0]/nmdaSyn/plasticityMechanism/R"/> 
+        </OutputFile> 
+<!--
+        <Display id="d2" title="block factor for rampCell" timeScale="1ms" xmin="-20" xmax="220" ymin="-0.2" ymax="1.2">
+            <Line id="0.001 mM"
+                  quantity="rampPop[0]/nmdaSyn0/blockMechanism/blockFactor"
+                  scale="1"  color="#DBA901" timeScale="1ms"/>
+            <Line id="0.01 mM"
+                  quantity="rampPop[0]/nmdaSyn1/blockMechanism/blockFactor"
+                  scale="1"  color="#AEB404" timeScale="1ms"/>
+            <Line id="0.1 mM"
+                  quantity="rampPop[0]/nmdaSyn2/blockMechanism/blockFactor"
+                  scale="1"  color="#298A08" timeScale="1ms"/>
+            <Line id="1 mM"
+                  quantity="rampPop[0]/nmdaSyn3/blockMechanism/blockFactor"
+                  scale="1"  color="#086A87" timeScale="1ms"/>
+            <Line id="10 mM"
+                  quantity="rampPop[0]/nmdaSyn4/blockMechanism/blockFactor"
+                  scale="1"  color="#29088A" timeScale="1ms"/>
+            <Line id="100 mM"
+                  quantity="rampPop[0]/nmdaSyn5/blockMechanism/blockFactor"
+                  scale="1"  color="#8A0886" timeScale="1ms"/>
+        </Display>
+    
+        <OutputFile id="of1" fileName="nmda.dat">
+            <OutputColumn id="0" quantity="clampPop[0]/nmdaSyn/g"/>
+            <OutputColumn id="1"
+                    quantity="clampPop[0]/nmdaSyn/plasticityMechanism/U"/>
+            <OutputColumn id="2"
+                    quantity="clampPop[0]/nmdaSyn/plasticityMechanism/R"/>
+            <OutputColumn id="3"
+                        quantity="rampPop[0]/v"/> 
+            <OutputColumn id="4"
+                        quantity="rampPop[0]/nmdaSyn0/blockMechanism/blockFactor"/> 
+            <OutputColumn id="5"
+                        quantity="rampPop[0]/nmdaSyn1/blockMechanism/blockFactor"/> 
+            <OutputColumn id="6"
+                        quantity="rampPop[0]/nmdaSyn2/blockMechanism/blockFactor"/> 
+            <OutputColumn id="7"
+                        quantity="rampPop[0]/nmdaSyn3/blockMechanism/blockFactor"/> 
+            <OutputColumn id="8"
+                        quantity="rampPop[0]/nmdaSyn4/blockMechanism/blockFactor"/> 
+            <OutputColumn id="9"
+                        quantity="rampPop[0]/nmdaSyn5/blockMechanism/blockFactor"/> 
+        </OutputFile> -->
+
+    </Simulation>
+
+</Lems>

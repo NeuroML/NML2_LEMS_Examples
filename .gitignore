@@ -1,0 +1,9 @@
+/README.md~
+*.dat
+*.pyc
+*.pyo
+*.test
+*.pyc
+*.ode
+*.json
+x86_64

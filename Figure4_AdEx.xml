@@ -1,0 +1,37 @@
+<Lems>
+
+    <Target component="sim1"/>
+    
+    <!-- Include standard NeuroML2 ComponentType definitions -->
+    <Include file="Cells.xml"/>
+    <Include file="Networks.xml"/>
+    <Include file="Simulation.xml"/>
+    
+    
+    <Include file="Figure4_AdEx.nml"/>
+    
+    
+    <Simulation id="sim1" length="500ms" step="0.01ms" target="net1">
+    
+        <Display id="d1" title="Cell 1" timeScale="1ms" xmin="-50" xmax="550" ymin="-90" ymax="60">
+            <Line id="v" quantity="adexpop1[0]/v" scale="1mV"  color="#ffffff" timeScale="1ms"/>
+            <Line id="w" quantity="adexpop1[0]/w" scale="0.01nA"  color="#faaaaf" timeScale="1ms"/>
+        </Display>
+        <Display id="d2" title="Cell 2" timeScale="1ms" xmin="-50" xmax="550" ymin="-90" ymax="60">
+            <Line id="v" quantity="adexpop2[0]/v" scale="1mV"  color="#ffffff" timeScale="1ms"/>
+            <Line id="w" quantity="adexpop2[0]/w" scale="0.01nA"  color="#faaaaf" timeScale="1ms"/>
+        </Display>
+        
+        <OutputFile id="of0" fileName="adex1_v.dat">
+            <OutputColumn id="v" quantity="adexpop1[0]/v"/> 
+            <OutputColumn id="w" quantity="adexpop1[0]/w"/> 
+        </OutputFile> 
+        
+        <OutputFile id="of1" fileName="adex2_v.dat">
+            <OutputColumn id="v" quantity="adexpop2[0]/v"/> 
+            <OutputColumn id="w" quantity="adexpop2[0]/w"/> 
+        </OutputFile> 
+    
+    </Simulation>
+
+</Lems>
