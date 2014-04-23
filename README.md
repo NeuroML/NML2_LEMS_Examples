@@ -6,9 +6,9 @@ This repository contains a number of examples of models expressed in LEMS & Neur
 Note: this repository includes snapshots of jLEMS or PyLEMS which can read & execute these examples.
 
 The latest versons of jLEMS, PyLEMS and the NeuroML 2 ComponentTypes are at:
-https://github.com/LEMS/jLEMS
-https://github.com/LEMS/pylems
-https://github.com/NeuroML/NeuroML2
+* https://github.com/LEMS/jLEMS
+* https://github.com/LEMS/pylems
+* https://github.com/NeuroML/NeuroML2
 
 jLEMS
 -----
