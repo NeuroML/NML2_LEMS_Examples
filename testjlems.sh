@@ -6,6 +6,8 @@ set -e
 ./jlems Figure5_NMDA.xml -nogui
 ./jlems Figure8_SBML_LEMS.xml -nogui
 
-
-#cd Figure9_Pyloric/
-#./jlems LEMS_PyloricPacemakerNetwork.xml -nogui
+if [ $# -eq 1 ] ; then
+    if [ $1 == "-a" ]; then
+        ./jlems Figure9_Pyloric/LEMS_PyloricPacemakerNetwork.xml -nogui
+    fi
+fi

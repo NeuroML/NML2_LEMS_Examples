@@ -6,7 +6,10 @@ set -e
 ./pylems Figure5_NMDA.xml -nogui
 ./pylems Figure8_SBML_LEMS.xml -nogui
 
-####  NOTE: Only uncomment this if you're prepared to wait ~30-40 mins...
+####  NOTE: Only run this with -a if you're prepared to wait ~30-40 mins...
 
-#cd Figure9_Pyloric/
-#./pylems LEMS_PyloricPacemakerNetwork.xml -nogui
+if [ $# -eq 1 ] ; then
+    if [ $1 == "-a" ]; then
+        ./pylems Figure9_Pyloric/LEMS_PyloricPacemakerNetwork.xml -nogui
+    fi
+fi
