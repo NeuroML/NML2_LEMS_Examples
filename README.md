@@ -1,5 +1,5 @@
-Some examples of LEMS & NeuroML2
-================================
+Examples of LEMS & NeuroML2
+===========================
 
 This repository contains a number of examples of models expressed in LEMS & NeuroML 2.
 
@@ -18,7 +18,7 @@ To run these examples with the included version of jLEMS:
     ./jlems Figure3_HHcell.xml        (Linux/Mac)
     jlems.bat Figure3_HHcell.xml      (Windows)
 
-These examples can also be run using jNeuroML, which also gives export (e.g. 
+These examples can also be run using **jNeuroML**, which also gives export (e.g. 
 -neuron, -brian) and import (-sbml-import) options
 
 Note: instructions for getting the latest version of jNeuroML can be found at: 
