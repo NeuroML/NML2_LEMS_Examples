@@ -3,5 +3,9 @@ python: 2.7
 
 script:
 - ./testpylems.sh
+- ls -alt
+- ./testjlems.sh
+- ls -alt
+
 
 
