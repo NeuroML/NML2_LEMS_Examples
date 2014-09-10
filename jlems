@@ -1,4 +1,6 @@
-export LEMS_VERSION=0.9.5.2
+#!/bin/sh
+
+export LEMS_VERSION=0.9.5.3
 
 export CLASSPATH=jlems-$LEMS_VERSION.jar
 

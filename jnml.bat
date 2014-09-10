@@ -1,7 +1,7 @@
 @echo off
 
-set JNML_VERSION=0.4.0
+set LEMS_VERSION=0.9.5.3
 
-set CLASSPATH=jNeuroML-%JNML_VERSION%-jar-with-dependencies.jar
+set CLASSPATH=jlems-%LEMS_VERSION%.jar
 
-java -Xmx400M -cp %CLASSPATH% org.neuroml.JNeuroML %1 %2 %3 %4 %5 %6
+java -Xmx400M -classpath %CLASSPATH% org.lemsml.jlems.viz.VizMain %1 %2 %3 %4
