@@ -33,6 +33,6 @@ Run the examples using the included version of PyLEMS:
 
     python pylems Figure3_HHcell.xml
     
-[![Build Status](https://travis-ci.org/NeuroML/NML2_LEMS_Examples.svg?branch=master)](https://travis-ci.org/NeuroML/NML2_LEMS_Examples)
+[![Build Status](https://travis-ci.com/NeuroML/NML2_LEMS_Examples.svg?branch=master)](https://travis-ci.com/NeuroML/NML2_LEMS_Examples)
 
 
