@@ -7,10 +7,10 @@ Robert C. Cannon, Padraig Gleeson, Sharon Crook, Gautham Ganapathy, Boris Marin,
 
 **Note: this repository includes snapshots of jLEMS or PyLEMS which can read & execute the example models.**
 
-The **latest versons** of jLEMS, PyLEMS and the NeuroML 2 ComponentTypes are at:
-* https://github.com/LEMS/jLEMS
-* https://github.com/LEMS/pylems
-* https://github.com/NeuroML/NeuroML2
+Information about getting the **latest versons** of jLEMS, PyLEMS and the NeuroML 2 ComponentTypes are at:
+* https://docs.neuroml.org/Userdocs/Software/jLEMS.html
+* https://docs.neuroml.org/Userdocs/Software/pyLEMS.html
+* https://docs.neuroml.org/Userdocs/NeuroMLv2.html
 
 jLEMS
 -----
@@ -20,10 +20,10 @@ To run these examples with the included version of jLEMS:
     ./jlems Figure3_HHcell.xml        (Linux/Mac)
     jlems.bat Figure3_HHcell.xml      (Windows)
 
-These examples can alternatively be run using **[jNeuroML](https://github.com/NeuroML/jNeuroML)**, which also provides export (e.g. -neuron, -brian) and import (-sbml-import) options
+These examples can alternatively be run using **[jNeuroML](https://docs.neuroml.org/Userdocs/Software/jNeuroML.html)**, which also provides export (e.g. -neuron, -brian) and import (-sbml-import) options
 
 Note: full instructions for getting the latest version of jNeuroML can be found at: 
-https://github.com/NeuroML/jNeuroML
+https://docs.neuroml.org/Userdocs/Software/jNeuroML.html
 
 
 PyLEMS
